@@ -29,10 +29,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText1"
         android:layout_width="370dp"
-        android:layout_height="61dp"
+        android:layout_height="70dp"
         android:layout_marginTop="250dp"
         android:ems="10"
         android:inputType="textEmailAddress"
+        app:errorEnabled="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -43,9 +45,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fullname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Full Name"
+            android:layout_height="50dp"
             android:drawableStart="@drawable/ic_person_black_24dp"
+            android:hint="Full Name"
             android:inputType="textPersonName"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -53,10 +55,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText2"
         android:layout_width="370dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:inputType="textPassword"
+        app:errorEnabled="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -67,9 +71,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phonenumber"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone number"
+            android:layout_height="50dp"
             android:drawableStart="@drawable/ic_phone_black_24dp"
+            android:hint="Phone number"
             android:inputType="phone"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,10 +81,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText3"
         android:layout_width="370dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:inputType="textPassword"
+        app:errorEnabled="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -91,9 +97,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="E-mail"
+            android:layout_height="50dp"
             android:drawableStart="@drawable/ic_email_black_24dp"
+            android:hint="E-mail"
             android:inputType="textEmailAddress"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -101,10 +107,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editText4"
         android:layout_width="370dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:inputType="textPassword"
+        app:errorEnabled="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -115,9 +123,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
+            android:layout_height="50dp"
             android:drawableStart="@drawable/ic_lock_black_24dp"
+            android:hint="Password(Minimum 6 character)"
             android:inputType="textPassword"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -130,23 +138,22 @@
         android:layout_marginTop="18dp"
         android:text="Signup"
         android:textAllCaps="false"
-        android:textColor="#ffffff"
         android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/progressbar"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/signup"
         app:layout_constraintEnd_toEndOf="@+id/signup"
         app:layout_constraintStart_toStartOf="@+id/signup"
-        app:layout_constraintTop_toTopOf="@+id/signup"
-        android:background="@drawable/progressbar"/>
+        app:layout_constraintTop_toTopOf="@+id/signup" />
 
     <TextView
         android:id="@+id/login"
@@ -160,4 +167,5 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

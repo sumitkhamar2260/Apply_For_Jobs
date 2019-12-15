@@ -3,5 +3,6 @@
     <color name="colorPrimary">#079CFF</color>
     <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorAccent">#2979ff</color>
+    <color name="btnText">#ffffff</color>
     <color name="flatButton">#757575</color>
 </resources>
