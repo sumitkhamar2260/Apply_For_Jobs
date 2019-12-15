@@ -112,7 +112,7 @@
         android:ems="10"
         android:inputType="textPassword"
         app:errorEnabled="true"
-
+        app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
@@ -126,6 +126,7 @@
             android:layout_height="50dp"
             android:drawableStart="@drawable/ic_lock_black_24dp"
             android:hint="Password(Minimum 6 character)"
+
             android:inputType="textPassword"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
