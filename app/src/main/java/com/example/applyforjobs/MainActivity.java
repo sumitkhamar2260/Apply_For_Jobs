@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 LoginUserProcess();
             }
         });
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             passwordlay.requestFocus();
             return;
         }
+         passwordlay.setError(null);
          loginbtn.setText("");
          loginbtn.setEnabled(false);
          progressbar.setVisibility(View.VISIBLE);
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         Boolean emailflag=firebaseUser.isEmailVerified();
         if(emailflag){
             startActivity(new Intent(MainActivity.this,Homepage.class));
+            loginbtn.setEnabled(true);
             loginbtn.setText("Login");
             progressbar.setVisibility(View.GONE);
             MainActivity.this.finish();

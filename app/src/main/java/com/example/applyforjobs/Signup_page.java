@@ -22,6 +22,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.applyforjobs.R.color.btnText;
 import static com.example.applyforjobs.R.color.error_color_material_dark;
@@ -35,6 +39,7 @@ public class Signup_page extends AppCompatActivity {
     ProgressBar progressBar;
     TextView login;
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class Signup_page extends AppCompatActivity {
         emaillay = (TextInputLayout)findViewById(R.id.editText3);
         passwordlay = (TextInputLayout)findViewById(R.id.editText4);
         firebaseAuth = firebaseAuth.getInstance();
-
+        firebaseDatabase = firebaseDatabase.getInstance();
 
 
 
@@ -93,31 +98,53 @@ public class Signup_page extends AppCompatActivity {
          //validation logic
          if (fullName.isEmpty())
          {
-             fullnamelay.setError("Invalid Full Name");
+             fullnamelay.setError("Full Name can't be empty");
              fullnamelay.requestFocus();
              return;
          }
-         if ((phoneNumber.isEmpty()) && phoneNumber.length() != 10)
+         if (phoneNumber.isEmpty())
          {
              fullnamelay.setError(null);
-             phonenumberlay.setError("Invalid Phone");
+             phonenumberlay.setError("Phone Number can't be empty");
              phonenumberlay.requestFocus();
              return;
          }
-         if (Email.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(Email).matches())
+         if (phoneNumber.length() != 10)
          {
              phonenumberlay.setError(null);
-             emaillay.setError("Invalid E-mail");
+             phonenumberlay.setError("Invalid Mobile Number Length");
+             phonenumberlay.requestFocus();
+             return;
+         }
+         if (Email.isEmpty())
+         {
+             phonenumberlay.setError(null);
+             emaillay.setError("E-mail can't be empty");
              emaillay.requestFocus();
              return;
          }
-         if (Pass.isEmpty() && Pass.length() < 6)
+         if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
          {
              emaillay.setError(null);
-             passwordlay.setError("Invalid Password");
+             emaillay.setError("Invalid E-mail pattern");
+             emaillay.requestFocus();
+             return;
+         }
+         if (Pass.isEmpty())
+         {
+             emaillay.setError(null);
+             passwordlay.setError("Password can't be empty");
              passwordlay.requestFocus();
              return;
          }
+         if (Pass.length() < 6)
+         {
+             passwordlay.setError(null);
+             passwordlay.setError("Password must be atleast 6 char. long.");
+             passwordlay.requestFocus();
+             return;
+         }
+         passwordlay.setError(null);
          //////////
          signupbtn.setText("");
          signupbtn.setEnabled(false);
@@ -130,19 +157,25 @@ public class Signup_page extends AppCompatActivity {
                              //sending verification Email
                              firebaseAuth.getCurrentUser().sendEmailVerification()
                                      .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
-                                     Toast.makeText(Signup_page.this,"Verification Email sent to"+Email,Toast.LENGTH_LONG).show();
-                                 }
+                                   @Override
+                                   public void onComplete(@NonNull Task<Void> task) {
+                                      Toast.makeText(Signup_page.this,"Verification Email sent to"+Email,Toast.LENGTH_LONG).show();
+                                   }
                              });
+
                              //saving user data in database
+                             Map<Object,String> userdata = new HashMap<>();
+                             userdata.put("Email",Email);
+                             userdata.put("fullname",fullName);
+                             userdata.put("phonenumber",phoneNumber);
+                             firebaseDatabase.getReference("users")
+                                     .child(firebaseAuth.getCurrentUser().getUid()).setValue(userdata);
 
                              //shift user to MainActivity activity
                              startActivity(new Intent(Signup_page.this, MainActivity.class));
                              progressBar.setVisibility(View.GONE);
                              signupbtn.setText("Signup");
                              Signup_page.this.finish();
-
 
                          }else{
                              Toast.makeText(Signup_page.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
