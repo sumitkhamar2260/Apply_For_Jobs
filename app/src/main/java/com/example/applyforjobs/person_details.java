@@ -25,19 +25,17 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Calendar;
 
 public class person_details extends AppCompatActivity {
-    TextInputEditText Fname,Address,Email,Mobnum,date;
-    TextInputLayout namelay,addresslay,statelay,citylay,emaillay,datelay;
+    TextInputEditText Fname,Address,Email,Mobnum,Date;
+    TextInputLayout namelay,addresslay,statelay,citylay,emaillay,datelay,mobilelay;
     MaterialButton savebtn;
-    Spinner statespinner;
+    Spinner Statespinner;
     Calendar c;
     DatePickerDialog dpd;
-    AutoCompleteTextView city;
+    AutoCompleteTextView City;
     ArrayAdapter stateadpt;
     Resources res;
     Context cnt;
-    String[] cities;
-    ArrayAdapter<String> unit_adapter;
-    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,57 +45,81 @@ public class person_details extends AppCompatActivity {
         Address=findViewById(R.id.address);
         Email=findViewById(R.id.email);
         Mobnum=findViewById(R.id.mobnum);
+        City=findViewById(R.id.cityauto);
+        Date=findViewById(R.id.date);
         namelay=findViewById(R.id.namelay);
         addresslay=findViewById(R.id.addresslay);
         statelay=findViewById(R.id.statelay);
         citylay=findViewById(R.id.citylay);
         emaillay=findViewById(R.id.emaillay);
-        statespinner=findViewById(R.id.spinner);
-        city=findViewById(R.id.cityauto);
-        date=findViewById(R.id.date);
+        mobilelay=findViewById(R.id.mobilelay);
+        Statespinner=findViewById(R.id.spinner);
         datelay=findViewById(R.id.datelay);
         savebtn=findViewById(R.id.savebtn);
         stateadpt = ArrayAdapter.createFromResource(
                 this, R.array.state, android.R.layout.simple_spinner_item);
         stateadpt.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        statespinner.setAdapter(stateadpt);
+        Statespinner.setAdapter(stateadpt);
         res=getResources();
         cnt=getApplicationContext();
 
-        statespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                  setspinner(parent,view,position,id);
-                 }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-///getting date from user
-        date.setOnClickListener(new View.OnClickListener() {
+        ///getting date from user
+        Date.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
                 getdateofbirth();
             }
         });
-   savebtn.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View view) {
-           SaveDetails();
-       }
-   });
+        savebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SaveDetails();
+            }
+        });
+
     }
 
     private void SaveDetails() {
         String fname=Fname.getText().toString().trim();
         String address=Address.getText().toString().trim();
         String email=Email.getText().toString().trim();
-
+        String mobnum=Mobnum.getText().toString().trim();
+        String city=City.getText().toString().trim();
+        String state=Statespinner.getSelectedItem().toString().trim();
+        String date=Date.getText().toString().trim();
         if(fname.isEmpty()){
             namelay.setError("Name can't be empty");
-
         }
+        if(address.isEmpty()){
+            namelay.setError("");
+            addresslay.setError("Address can't be empty");
+        }
+        if(state.isEmpty()){
+            addresslay.setError("");
+            statelay.setError("state can't be empty");
+        }
+        if(city.isEmpty()){
+            statelay.setError("");
+            citylay.setError("city can't be empty");
+        }
+        if(email.isEmpty()){
+            citylay.setError("");
+            emaillay.setError("Email can't be empty");
+        }
+        if(mobnum.isEmpty()){
+            emaillay.setError("");
+            mobilelay.setError("Mobile Number can't be empty");
+        }
+        if(mobnum.length()!= 10){
+            mobilelay.setError("");
+            mobilelay.setError("Invalid length of Mobile Number");
+        }
+        if(date.isEmpty()){
+            mobilelay.setError("");
+            datelay.setError("Name can't be empty");
+        }
+
     }
 
     //get D.O.B. using calendar
@@ -109,40 +131,13 @@ public class person_details extends AppCompatActivity {
             dpd = new DatePickerDialog(person_details.this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
-                    date.setText(mDay+"/"+(mMonth+1)+"/"+mYear);
+                    Date.setText(mDay+"/"+(mMonth+1)+"/"+mYear);
                 }
             },year,month+1,day);
             dpd.show();
         }
 
-   private void setspinner(AdapterView<?> parent, View view, int position, long id){
-       int iden = parent.getId();
 
-       if (iden == R.id.spinner) {
-           int flag=0;
-           String state1 = parent.getSelectedItem().toString();
-           int end=state1.indexOf(" ");
-           if(end>0) {
-               state1 = state1.substring(0, end);
-           }
-           res=getResources();
-           int id1=res.getIdentifier(state1,"array",cnt.getPackageName());
-           cities=res.getStringArray(id1);
-           unit_adapter = new ArrayAdapter<String>
-                   (parent.getContext(),android.R.layout.simple_dropdown_item_1line,cities);
-           for(int i=0;i<cities.length;i++)
-           {
-               if (cities[i].equals(city.getText().toString())) {
-                   flag++;
-                   break;
-               }
-           }
-           if(flag==0)
-               citylay.setError("Invalid city");
-       }
-       citylay.setError("Select City");
-       city.setAdapter(unit_adapter);
-    }
 }
 
 

@@ -284,7 +284,8 @@
     </string-array>
 
 
-    <string-array name="Andaman">Andhra Pradesh
+    <string-array name="Andaman">
+
         <item>	Alipur	</item>
         <item>	Andaman Island	</item>
         <item>	Anderson Island	</item>
