@@ -5,4 +5,5 @@
     <color name="colorAccent">#2979ff</color>
     <color name="btnText">#ffffff</color>
     <color name="flatButton">#757575</color>
+    <color name="blacktext">#323232</color>
 </resources>

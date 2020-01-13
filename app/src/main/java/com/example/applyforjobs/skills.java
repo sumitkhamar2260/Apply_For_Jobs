@@ -1,0 +1,67 @@
+package com.example.applyforjobs;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+public class skills extends AppCompatActivity {
+    AutoCompleteTextView skill;
+    TextInputLayout skilllay;
+     String[] skills;
+     MaterialButton maddbtn;
+     MaterialCardView mcard;
+     LinearLayout parentLinearLayout;
+    TextView tv;
+    int count=0;
+     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_skills);
+        skilllay=findViewById(R.id.skilllay);
+        parentLinearLayout=findViewById(R.id.parent_linear_layout2);
+        skill=findViewById(R.id.autoskill);
+        maddbtn=findViewById(R.id.addbtn);
+
+        Resources res= getResources();
+        skills=res.getStringArray(R.array.skillset);
+        ArrayAdapter<String> skilladapter=
+                new ArrayAdapter<String>(this,android.R.layout.select_dialog_item,skills);
+        skill.setThreshold(1);
+        skill.setAdapter(skilladapter);
+        maddbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onAddskill();
+            }
+        });
+    }
+  public void onAddskill(){
+         for(String ele:skills){
+             if(ele.equals(skill.getText().toString())){
+                 tv=new TextView(this);
+                 mcard=new MaterialCardView(this);
+                 mcard.setId(++count);
+                 tv.setId(++count);
+                 tv.setText(skill.getText());
+                 mcard.addView(tv);
+                 mcard.setCardBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                 parentLinearLayout.addView(mcard);
+             }
+         }
+
+
+  }
+}

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".person_details">
+
+    ///////////////////////////////////
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        app:title="Details"
+        android:paddingStart="16dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+//////////////
+
+    <ScrollView
+        android:id="@+id/scv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/llv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nametext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/blacktext"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Full Name"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/namelay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fname"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/addresstext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/blacktext"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Address"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addresslay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textPostalAddress"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/statetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/blacktext"
+                android:text="State"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/statelay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/gradient_spinner"
+                    android:spinnerMode="dialog" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/citytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="City"
+                android:textColor="@color/blacktext"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/citylay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+                <AutoCompleteTextView
+                    android:id="@+id/cityauto"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingStart="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/emailtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="E-Mail"
+                android:textSize="15dp"
+                android:textColor="@color/blacktext"
+                android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emaillay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+            //////////////////////
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mobiletext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/blacktext"
+                android:text="MobileNumber"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobilelay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mobnum"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:inputType="phone"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/datetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/blacktext"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Date Of Birth"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/datelay"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:focusableInTouchMode="false"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/savebtn"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:text="Save"
+                android:textColor="#fff"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

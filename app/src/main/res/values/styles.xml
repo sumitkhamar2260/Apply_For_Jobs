@@ -15,9 +15,26 @@
         <item name="boxStrokeColor">@color/colorPrimary</item>
     </style>
     <style name="Button" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="cornerRadius">18dp</item>
+        <item name="cornerRadius">5dp</item>
         <item name="backgroundTint">@color/colorPrimary</item>
     </style>
+    <style name="MyCardView" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Cut</item>
+    </style>
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
 
+    <style name="ShapeAppearanceOverlay.MaterialCardView.Cut" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">25dp</item>
+        <item name="cornerSizeTopLeft">25dp</item>
+        <item name="cornerSizeBottomRight">25dp</item>
+        <item name="cornerSizeBottomLeft">25dp</item>
+        <item name="android:shadowRadius">20.00</item>
+        <item name="android:shadowColor">#000</item>
+    </style>
 
 </resources>

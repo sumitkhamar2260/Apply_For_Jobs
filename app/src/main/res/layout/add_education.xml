@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/qualitext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/blacktext"
+        android:text="Degree"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/adddegreelay"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <AutoCompleteTextView
+            android:id="@+id/degreespinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/gradient_spinner"
+            android:spinnerMode="dialog" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/addfieldofstudytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/blacktext"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Field Of Study"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/foslay"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/fosspinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/gradient_spinner"
+            android:spinnerMode="dialog" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+    android:id="@+id/removebtn"
+    style="@style/Button"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_marginStart="200dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="24dp"
+    android:text="Remove"
+    app:backgroundTint="#ff0000"
+    android:onClick="onDelete"
+    android:textColor="#fff"
+    android:textSize="15dp" />
+
+    <View style="@style/Divider"/>
+</LinearLayout>
