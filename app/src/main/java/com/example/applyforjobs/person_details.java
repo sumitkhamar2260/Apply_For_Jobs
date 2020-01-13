@@ -81,9 +81,26 @@ public class person_details extends AppCompatActivity {
                 getdateofbirth();
             }
         });
-
+   savebtn.setOnClickListener(new View.OnClickListener() {
+       @Override
+       public void onClick(View view) {
+           SaveDetails();
+       }
+   });
     }
-  //get D.O.B. using calendar
+
+    private void SaveDetails() {
+        String fname=Fname.getText().toString().trim();
+        String address=Address.getText().toString().trim();
+        String email=Email.getText().toString().trim();
+
+        if(fname.isEmpty()){
+            namelay.setError("Name can't be empty");
+
+        }
+    }
+
+    //get D.O.B. using calendar
    private void getdateofbirth(){
             c=Calendar.getInstance();
             int day=c.get(Calendar.DAY_OF_MONTH);
