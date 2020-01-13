@@ -119,7 +119,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="80dp"
-            android:text="add more education"
+            android:text="Save Details"
            android:enabled="true"
             android:textColor="#fff"
             android:textSize="15dp" />
@@ -127,19 +127,5 @@
 
         </LinearLayout>
     </ScrollView>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/savebtn"
-        style="@style/Button"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:text="Submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="#fff"
 
-        android:textSize="15dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
