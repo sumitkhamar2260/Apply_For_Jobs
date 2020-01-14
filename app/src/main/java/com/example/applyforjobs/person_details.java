@@ -61,6 +61,7 @@ public class person_details extends AppCompatActivity {
                 this, R.array.state, android.R.layout.simple_spinner_item);
         stateadpt.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         statespinner.setAdapter(stateadpt);
+        //TODO:add adpter to city autocomplete view
         res=getResources();
         cnt=getApplicationContext();
 
