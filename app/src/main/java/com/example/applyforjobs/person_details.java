@@ -59,8 +59,6 @@ public class person_details extends AppCompatActivity {
         stateadpt = ArrayAdapter.createFromResource(
                 this, R.array.state, android.R.layout.simple_spinner_item);
         stateadpt.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        Statespinner.setAdapter(stateadpt);
-        //TODO:adapter to city is not add
         res=getResources();
         cnt=getApplicationContext();
 
