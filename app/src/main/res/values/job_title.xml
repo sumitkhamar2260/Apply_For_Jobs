@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="job_title">
+        <item>Web Developer</item>
+        <item>Android Developer</item>
+        <item>Biologist</item>
+        <item>Carpenter</item>
+        <item>Mobile-App Developer</item>
+        <item>Python Developer</item>
+        <item>Frontend Developer</item>
+        <item>Backend Developer</item>
+        <item>Magento Developer</item>
+    </string-array>
+</resources>

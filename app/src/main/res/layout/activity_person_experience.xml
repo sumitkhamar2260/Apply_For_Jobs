@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".person_details">
+    tools:context=".person_experience">
 
-    ///////////////////////////////////
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -14,221 +13,243 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
-        app:title="Details"
         android:paddingStart="16dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Details" />
 
-//////////////
+    //////////////
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:text="Experience"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <ScrollView
         android:id="@+id/scv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
-            android:id="@+id/llv"
+            android:id="@+id/parent_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/nametext"
+                android:id="@+id/titletext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
-                android:textColor="@color/blacktext"
                 android:fontFamily="sans-serif-condensed"
-                android:text="Full Name"
+                android:text="Job Title"
+                android:textColor="@color/blacktext"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/namelay"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                app:errorEnabled="true">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fname"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:inputType="textPersonName"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/addresstext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/blacktext"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Address"
-                android:textSize="15dp"
-                android:textStyle="bold" />
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addresslay"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/address"
+
+                <AutoCompleteTextView
+                    android:id="@+id/titleauto"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="textPostalAddress"
-                    android:maxLines="1" />
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/gradient_spinner" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/statetext"
+                android:id="@+id/typetext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="sans-serif-condensed"
+                android:text="Job Type"
                 android:textColor="@color/blacktext"
-                android:text="State"
                 android:textSize="15dp"
                 android:textStyle="bold" />
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/statelay"
+                android:id="@+id/jobtypelay"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
+
                 <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/jobtypespinner"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="0dp"
                     android:background="@drawable/gradient_spinner"
                     android:spinnerMode="dialog" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/citytext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="sans-serif-condensed"
-                android:text="City"
+                android:text="Company Name"
                 android:textColor="@color/blacktext"
                 android:textSize="15dp"
                 android:textStyle="bold" />
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/citylay"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
+
                 <AutoCompleteTextView
-                    android:id="@+id/cityauto"
+                    android:id="@+id/companynameauto"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:paddingStart="8dp" />
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/gradient_spinner" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/emailtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="sans-serif-condensed"
-                android:text="E-Mail"
-                android:textSize="15dp"
+                android:text="Company Location"
                 android:textColor="@color/blacktext"
+                android:textSize="15dp"
                 android:textStyle="bold" />
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emaillay"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
+                <AutoCompleteTextView
+                    android:id="@+id/companylocauto"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1" />
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/gradient_spinner" />
             </com.google.android.material.textfield.TextInputLayout>
-            //////////////////////
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/mobiletext"
+            <CheckBox
+                android:id="@+id/mcheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/blacktext"
-                android:text="MobileNumber"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/mobilelay"
+                android:layout_marginStart="24dp"
+                android:text="I currently work here"/>
+
+
+
+
+//////////////////////////
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/mobnum"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:inputType="phone"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/datetext"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/blacktext"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Date Of Birth"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/datelay"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                app:errorEnabled="true">
+                >
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/date"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:focusableInTouchMode="false"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/starttext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="Start Date"
+                    android:textColor="@color/blacktext"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/endtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="End Date"
+                    android:textColor="@color/blacktext"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintHorizontal_bias="0.02"
+                    app:layout_constraintStart_toStartOf="@+id/endlay"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/startlay"
+                    android:layout_width="120dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/starttext">
+                 <com.google.android.material.textfield.TextInputEditText
+                     android:id="@+id/startdate"
+                     android:layout_width="120dp"
+                     android:layout_height="50dp"
+                     android:focusableInTouchMode="false"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/endlay"
+                    android:layout_width="120dp"
+                    android:layout_height="70dp"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/startlay"
+                    app:layout_constraintTop_toBottomOf="@+id/endtext">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/enddate"
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:focusableInTouchMode="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/saveperdetailbtn"
+                android:id="@+id/savebtn"
                 style="@style/Button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
@@ -240,4 +261,6 @@
                 android:textSize="15dp" />
         </LinearLayout>
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

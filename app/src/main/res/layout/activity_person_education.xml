@@ -77,7 +77,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
                 <AutoCompleteTextView
-                    android:id="@+id/degreespinner"
+                    android:id="@+id/degreeauto"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="0dp"
@@ -103,16 +103,16 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
                 <AutoCompleteTextView
-                    android:id="@+id/fosspinner"
+                    android:id="@+id/fosauto"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="0dp"
                     android:background="@drawable/gradient_spinner" />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <View style="@style/Divider"/>
+
             <com.google.android.material.button.MaterialButton
-            android:id="@+id/addbtn"
+            android:id="@+id/saveedubtn"
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="56dp"

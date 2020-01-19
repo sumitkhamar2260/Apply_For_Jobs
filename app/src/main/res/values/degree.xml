@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Degree">
+        <item>Associate Degree</item>
+        <item>Associate of Arts</item>
+        <item>Associate of Science</item>
+        <item>Bachelor degree</item>
+        <item>Bachelor of Applied Science</item>
+        <item>Bachelor of Architecture</item>
+        <item>Bachelor of Arts</item>
+        <item>Bachelor of Business Administration</item>
+        <item>Bachelor of Commerce</item>
+        <item>Bachelor of Education</item>
+        <item>Bachelor of Engineering</item>
+        <item>Bachelor of Laws</item>
+        <item>Bachelor of Medicine,Bachelor of surgery</item>
+        <item>Bachelor of Pharmacy</item>
+        <item>Bachelor of Technology</item>
+        <item>Bachelor of Business Administarion</item>
+        <item>Doctor of Education</item>
+        <item>Doctor of Medicine</item>
+        <item>Doctor of Philosophy</item>
+        <item>Doctor of Pharmacy</item>
+        <item>High school Diploma</item>
+        <item>Master of Architecture</item>
+        <item>Master of Social Work</item>
+        <item>Master of Arts</item>
+        <item>Master of Business Administration</item>
+        <item>Master of Commerce</item>
+        <item>Master of Education</item>
+        <item>Master of Engineering</item>
+        <item>Master of Laws</item>
+        <item>Master of Philosophy</item>
+        <item>Master of Public Administration</item>
+        <item>Master of Technology</item>
+        <item>Master of Business Administarion</item>
+    </string-array>
+
+
+    <string-array name="fieldofstudy">
+        <item>Accounting</item>
+        <item>Architecture</item>
+        <item>Accounting and Finance</item>
+         <item>Aeronautical</item>
+        <item>Arts</item>
+        <item>Advertising</item>
+        <item>Biomedical</item>
+        <item>Business</item>
+        <item>Banking</item>
+        <item>Buisness Administration</item>
+        <item>Broadcast Journalism</item>
+        <item>Chemical Engineering</item>
+        <item>Compurter Systems Networking</item>
+        <item>Computer software Engineering</item>
+        <item>Computer Programming</item>
+        <item>Data processing</item>
+        <item>Digital Communication</item>
+        <item>Electrical,Electronics and Communication Engineering</item>
+        <item>Electrical Engineering</item>
+        <item>Fashion</item>
+        <item>Graphic Design</item>
+        <item>Geography</item>
+        <item>Human Resources Development</item>
+        <item>Health service Administarion</item>
+        <item>Humanities</item>
+        <item>Health Engineering</item>
+        <item>Interior design</item>
+        <item>Informatics</item>
+        <item>Information and Technology</item>
+        <item>Marketing</item>
+        <item>Mechanical Engineering</item>
+        <item>Medicine</item>
+        <item>Neuroscience</item>
+        <item>Nuclear Engineering</item>
+        <item>Nursing</item>
+        <item>Organic Chemistry</item>
+        <item>Optometry</item>
+        <item>Oceanography</item>
+        <item>Operations Research</item>
+        <item>Pharmacy</item>
+        <item>Physics</item>
+        <item>Project Mangement</item>
+        <item>Philosophy</item>
+        <item>Public Administration</item>
+        <item>Photography</item>
+        <item>Quality control</item>
+        <item>Real estate</item>
+        <item>Radio and Television</item>
+        <item>Tourism and Travel service Management</item>
+        <item>Urban studies</item>
+        <item>Writing</item>
+        <item>Water Resources Engineering</item>
+        <item>Yoga Teacher</item>
+        <item>Zoology</item>
+    </string-array>
+</resources>

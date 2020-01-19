@@ -12,13 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".skills">
+
+        </activity>
+        <activity android:name=".person_experience" > </activity>
+        <activity android:name=".person_education">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".experience" />
-        <activity android:name=".person_education">
         </activity>
         <activity android:name=".person_details">
 

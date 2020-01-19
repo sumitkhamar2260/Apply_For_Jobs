@@ -41,6 +41,8 @@ public class person_details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_details);
+        res=getResources();
+        cnt=getApplicationContext();
         Fname=findViewById(R.id.fname);
         Address=findViewById(R.id.address);
         Email=findViewById(R.id.email);
@@ -55,13 +57,11 @@ public class person_details extends AppCompatActivity {
         mobilelay=findViewById(R.id.mobilelay);
         Statespinner=findViewById(R.id.spinner);
         datelay=findViewById(R.id.datelay);
-        savebtn=findViewById(R.id.savebtn);
+        savebtn=findViewById(R.id.saveperdetailbtn);
         stateadpt = ArrayAdapter.createFromResource(
                 this, R.array.state, android.R.layout.simple_spinner_item);
         stateadpt.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        res=getResources();
-        cnt=getApplicationContext();
-
+        Statespinner.setAdapter(stateadpt);
         ///getting date from user
         Date.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)

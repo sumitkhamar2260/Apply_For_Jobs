@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="company_name">
+        <item>Adron Technology</item>
+        <item>Cipher Technology</item>
+        <item>D Technology</item>
+        <item>E Technology</item>
+        <item>K Technology</item>
+        <item>M Technology</item>
+        <item>N Technology</item>
+        <item>O Technology</item>
+        <item>P Technology</item>
+        <item>RanDOM Technology</item>
+        <item>Q Technology</item>
+        <item>S Technology</item>
+    </string-array>
+    <string-array name="job_type">
+        <item></item>
+        <item>Full-time</item>
+        <item>Part-time</item>
+        <item>Self-employed</item>
+        <item>Freelance</item>
+        <item>Contract</item>
+        <item>Internship</item>
+        <item>Apprenticeship</item>
+
+    </string-array>
+</resources>
