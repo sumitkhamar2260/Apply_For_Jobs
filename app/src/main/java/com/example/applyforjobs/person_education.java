@@ -41,6 +41,11 @@ public class person_education extends AppCompatActivity {
       savebtn.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
+              String deg=degree.getText().toString().trim();
+              String field=fieldofstudy.getText().toString().trim();
+              if(deg.isEmpty()){
+
+              }
               //TODO:save details to firebase
           }
       });
