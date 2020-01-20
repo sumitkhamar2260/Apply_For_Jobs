@@ -17,11 +17,18 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Field;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class person_experience extends AppCompatActivity {
     TextInputEditText startdate,enddate;
@@ -30,6 +37,9 @@ public class person_experience extends AppCompatActivity {
     AutoCompleteTextView jobtitle,companylocation,companyname;
     Resources res;
     Spinner jobtype;
+    MaterialButton savebutton;
+    TextInputLayout jobtitlelay,jobtypelay,companynamelay,companyloclay,startdatelay,enddatelay;
+    String sdate,edate,job_title,company_location,company_name,job_type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,9 +99,60 @@ public class person_experience extends AppCompatActivity {
                 if(cbox.isChecked()){
                    enddate.setText("Present");
                 }
+                else{
+                    enddate.setText(null);
+                }
             }
         });
+        jobtitlelay=findViewById(R.id.jobtitlelay);
+        jobtypelay=findViewById(R.id.jobtypelay);
+        companynamelay=findViewById(R.id.companynamelay);
+        companyloclay=findViewById(R.id.companyloclay);
+        startdatelay=findViewById(R.id.startlay);
+        enddatelay=findViewById(R.id.endlay);
+        savebutton=findViewById(R.id.savebtn);
+        savebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                job_title=jobtitle.getText().toString().trim();
+                job_type=jobtype.getSelectedItem().toString().trim();
+                company_name=companyname.getText().toString().trim();
+                company_location=companylocation.getText().toString().trim();
+                sdate=startdate.getText().toString().trim();
+                edate=enddate.getText().toString().trim();
+                if(job_title.isEmpty()){
+                    jobtitlelay.setError("Select job tile");
+                }
+                else if(job_type.isEmpty()){
+                    jobtypelay.setError("Select job type");
+                }
+                else if (company_name.isEmpty()){
+                    companynamelay.setError("Select company name");
+                }
+                else if (company_location.isEmpty()){
+                    companyloclay.setError("Enter  company name");
+                }
+                else if(sdate.isEmpty()){
+                    startdatelay.setError("Select start date");
+                }
+                else if(!cbox.isChecked() && edate.isEmpty()){
+                    enddatelay.setError("Select end date");
+                }
+                else {
+                    FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+                    DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
+                    Map<Object,String> experience= new HashMap<>();
+                    experience.put("Job Title",job_title);
+                    experience.put("Job Type",job_type);
+                    experience.put("Company Name",company_name);
+                    experience.put("Company Location",company_location);
+                    experience.put("Start Date",sdate);
+                    experience.put("End Date",edate);
+                    ref.child("Experience").setValue(experience);
+                }
+            }
 
+        });
     }
 
 

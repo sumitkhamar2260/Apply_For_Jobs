@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -64,7 +65,7 @@ public class person_details extends AppCompatActivity {
         mobilelay=findViewById(R.id.mobilelay);
         Statespinner=findViewById(R.id.spinner);
         datelay=findViewById(R.id.datelay);
-        savebtn=findViewById(R.id.savebtn);
+        savebtn=(MaterialButton)findViewById(R.id.saveperdetailbtn);
         stateadpt = ArrayAdapter.createFromResource(
                 this, R.array.state, android.R.layout.simple_spinner_item);
         stateadpt.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -186,6 +187,8 @@ public class person_details extends AppCompatActivity {
             personaldetails.put("DOB",date);
             ref.child("Personal details").setValue(personaldetails);
             //ref.child("Personal details").push().setValue(ob);
+            Intent intent=new Intent(person_details.this,person_education.class);
+            startActivity(intent);
         }
     }
 
