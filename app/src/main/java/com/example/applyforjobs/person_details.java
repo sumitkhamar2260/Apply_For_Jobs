@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,8 +24,14 @@ import android.widget.Toolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class person_details extends AppCompatActivity {
     TextInputEditText Fname,Address,Email,Mobnum,Date;
@@ -32,17 +41,16 @@ public class person_details extends AppCompatActivity {
     Calendar c;
     DatePickerDialog dpd;
     AutoCompleteTextView City;
-    ArrayAdapter stateadpt;
+    ArrayAdapter stateadpt,cityadapt;
     Resources res;
     Context cnt;
-
+    String selected_state="Andhra";
+    ArrayList<String> cities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_details);
-        res=getResources();
-        cnt=getApplicationContext();
         Fname=findViewById(R.id.fname);
         Address=findViewById(R.id.address);
         Email=findViewById(R.id.email);
@@ -57,11 +65,14 @@ public class person_details extends AppCompatActivity {
         mobilelay=findViewById(R.id.mobilelay);
         Statespinner=findViewById(R.id.spinner);
         datelay=findViewById(R.id.datelay);
-        savebtn=findViewById(R.id.saveperdetailbtn);
+        savebtn=(MaterialButton)findViewById(R.id.saveperdetailbtn);
         stateadpt = ArrayAdapter.createFromResource(
                 this, R.array.state, android.R.layout.simple_spinner_item);
         stateadpt.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         Statespinner.setAdapter(stateadpt);
+        res=getResources();
+        cnt=getApplicationContext();
+
         ///getting date from user
         Date.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -70,6 +81,24 @@ public class person_details extends AppCompatActivity {
                 getdateofbirth();
             }
         });
+        Statespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id1) {
+                selected_state=Statespinner.getSelectedItem().toString();
+                String[] s1=selected_state.split(" ",2);
+                int id=res.getIdentifier(s1[0],"array",person_details.this.getPackageName() );
+                System.out.println("id and selected state  "+id+"\t"+s1[0]);
+                //LayoutInflater
+                cityadapt=ArrayAdapter.createFromResource(getApplicationContext(),id,android.R.layout.simple_list_item_1);
+                //cityadapt.getAutofillOptions();
+                City.setAdapter(cityadapt);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,45 +109,87 @@ public class person_details extends AppCompatActivity {
     }
 
     private void SaveDetails() {
+
         String fname=Fname.getText().toString().trim();
         String address=Address.getText().toString().trim();
         String email=Email.getText().toString().trim();
         String mobnum=Mobnum.getText().toString().trim();
         String city=City.getText().toString().trim();
-        String state=Statespinner.getSelectedItem().toString().trim();
+        Log.d("city is",city);// "city is "+city);
         String date=Date.getText().toString().trim();
         if(fname.isEmpty()){
             namelay.setError("Name can't be empty");
         }
-        if(address.isEmpty()){
+        /*else if{
+            namelay.setError(null);
+        }*/
+        else if(address.isEmpty()){
             namelay.setError("");
             addresslay.setError("Address can't be empty");
         }
-        if(state.isEmpty()){
+        /*else{
+            addresslay.setError(null);
+        }*/
+        else if(selected_state.isEmpty()){
             addresslay.setError("");
             statelay.setError("state can't be empty");
         }
-        if(city.isEmpty()){
+        /*else{
+            statelay.setError(null);
+        }*/
+        else if(city.isEmpty()){
             statelay.setError("");
             citylay.setError("city can't be empty");
         }
-        if(email.isEmpty()){
+        /*else{
+            citylay.setError(null);
+        }*/
+        else if(email.isEmpty()){
             citylay.setError("");
             emaillay.setError("Email can't be empty");
         }
-        if(mobnum.isEmpty()){
+        /*else{
+            emaillay.setError(null);
+        }*/
+        else if(mobnum.isEmpty()){
             emaillay.setError("");
             mobilelay.setError("Mobile Number can't be empty");
         }
-        if(mobnum.length()!= 10){
+        /*else{
+            mobilelay.setError(null);
+        }*/
+        else if(mobnum.length()!= 10){
             mobilelay.setError("");
             mobilelay.setError("Invalid length of Mobile Number");
         }
-        if(date.isEmpty()){
+        /*else{
+            mobilelay.setError(null);
+        }*/
+        else if(date.isEmpty()){
             mobilelay.setError("");
             datelay.setError("Name can't be empty");
         }
-
+        /*else{
+            datelay.setError(null);
+        }*/
+        else
+        {
+            FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+            //person_details_pojo ob=new person_details_pojo(fname,address,selected_state,city,mobnum,email,date);
+            DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
+            Map<Object,String> personaldetails = new HashMap<>();
+            personaldetails.put("Name",fname);
+            personaldetails.put("Address",address);
+            personaldetails.put("State",selected_state);
+            personaldetails.put("City",city);
+            personaldetails.put("Mobile No",mobnum);
+            personaldetails.put("Email",email);
+            personaldetails.put("DOB",date);
+            ref.child("Personal details").setValue(personaldetails);
+            //ref.child("Personal details").push().setValue(ob);
+            Intent intent=new Intent(person_details.this,person_education.class);
+            startActivity(intent);
+        }
     }
 
     //get D.O.B. using calendar
