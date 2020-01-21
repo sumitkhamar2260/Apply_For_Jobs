@@ -9,6 +9,7 @@
     android:id="@+id/drawerlay">
 <include layout="@layout/content_home"/>
     <com.google.android.material.navigation.NavigationView
+        app:headerLayout="@layout/nav_header"
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
