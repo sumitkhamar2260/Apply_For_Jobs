@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
   NavigationView navigationView;
-  DrawerLayout drawerLayout;
+  public DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

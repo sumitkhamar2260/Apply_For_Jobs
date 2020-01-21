@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
         Boolean emailflag=firebaseUser.isEmailVerified();
         if(emailflag){
-            startActivity(new Intent(MainActivity.this,person_details.class));
+            startActivity(new Intent(MainActivity.this,Homepage.class));
             loginbtn.setEnabled(true);
             loginbtn.setText("Login");
             progressbar.setVisibility(View.GONE);
