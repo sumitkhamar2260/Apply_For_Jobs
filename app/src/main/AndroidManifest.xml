@@ -11,11 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Homepage"></activity>
-        <activity android:name=".skills"></activity>
-        <activity android:name=".person_experience"></activity>
-        <activity android:name=".person_education"></activity>
-        <activity android:name=".person_details"></activity>
+        <activity
+            android:name=".Test"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".applyjob" />
+        <activity android:name=".Homepage" />
+        <activity android:name=".skills" />
+        <activity android:name=".person_experience" />
+        <activity android:name=".person_education" />
+        <activity android:name=".person_details" />
         <activity android:name=".Signup_page" />
         <activity android:name=".MainActivity">
             <intent-filter>

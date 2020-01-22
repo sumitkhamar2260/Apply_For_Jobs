@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="textInputStyle">@style/AppTextField</item>
     </style>
+
     <style name="AppTheme1" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -15,21 +16,28 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="textInputStyle">@style/AppTextField</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextColor">@color/colorPrimary</item>
         <item name="boxBackgroundColor">@android:color/white</item>
         <item name="android:textCursorDrawable">@color/colorPrimary</item>
         <item name="boxStrokeColor">@color/colorPrimary</item>
     </style>
+
     <style name="Button" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="cornerRadius">5dp</item>
         <item name="backgroundTint">@color/colorPrimary</item>
     </style>
+
     <style name="MyCardView" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Cut</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Cut
+        </item>
     </style>
+
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">10dp</item>
@@ -44,6 +52,11 @@
         <item name="cornerSizeBottomLeft">25dp</item>
         <item name="android:shadowRadius">20.00</item>
         <item name="android:shadowColor">#000</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

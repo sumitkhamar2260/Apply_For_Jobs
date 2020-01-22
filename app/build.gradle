@@ -33,5 +33,6 @@ dependencies {
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 }
 apply plugin: 'com.google.gms.google-services'

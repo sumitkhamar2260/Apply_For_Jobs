@@ -64,7 +64,7 @@ public class person_education extends AppCompatActivity {
                   person_education.put("Field Of Study",field);
                   FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                   DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
-                  ref.child("Education").setValue(person_education);
+                  ref.child("Education").push().setValue(person_education);
                   startActivity(new Intent(person_education.this,person_experience.class));
               }
               //TODO:save details to firebase

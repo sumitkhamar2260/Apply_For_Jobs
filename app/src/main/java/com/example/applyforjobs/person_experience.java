@@ -148,7 +148,7 @@ public class person_experience extends AppCompatActivity {
                     experience.put("Company Location",company_location);
                     experience.put("Start Date",sdate);
                     experience.put("End Date",edate);
-                    ref.child("Experience").setValue(experience);
+                    ref.child("Experience").push().setValue(experience);
                 }
             }
 
