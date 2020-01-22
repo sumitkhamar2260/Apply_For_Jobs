@@ -2,6 +2,7 @@ package com.example.applyforjobs;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +35,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class person_details extends AppCompatActivity {
+public class person_details extends Homepage {
     TextInputEditText Fname,Address,Email,Mobnum,Date;
     TextInputLayout namelay,addresslay,statelay,citylay,emaillay,datelay,mobilelay;
     MaterialButton savebtn;
@@ -46,11 +48,17 @@ public class person_details extends AppCompatActivity {
     Context cnt;
     String selected_state="Andhra";
     ArrayList<String> cities;
-
+    DrawerLayout drawerLayout;
+    //NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_details);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_person_details,null,false);
+        drawerLayout=findViewById(R.id.drawerlay);
+        drawerLayout.addView(contentView, 0);
+
         Fname=findViewById(R.id.fname);
         Address=findViewById(R.id.address);
         Email=findViewById(R.id.email);

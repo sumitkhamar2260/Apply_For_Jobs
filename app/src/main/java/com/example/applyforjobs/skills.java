@@ -1,6 +1,7 @@
 package com.example.applyforjobs;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,20 +18,26 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class skills extends AppCompatActivity {
+public class skills extends Homepage {
     AutoCompleteTextView skill;
     TextInputLayout skilllay;
      String[] skills;
      MaterialButton maddbtn;
      MaterialCardView mcard;
      LinearLayout parentLinearLayout;
+     DrawerLayout drawerLayout;
     TextView tv;
     int count=0;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_skills);
-        skilllay=findViewById(R.id.skilllay);
+         LayoutInflater inflater = (LayoutInflater) this
+                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+         View contentView = inflater.inflate(R.layout.activity_skills,null,false);
+         drawerLayout=findViewById(R.id.drawerlay);
+         drawerLayout.addView(contentView, 0);
+
+         skilllay=findViewById(R.id.skilllay);
         parentLinearLayout=findViewById(R.id.parent_linear_layout2);
         skill=findViewById(R.id.autoskill);
         maddbtn=findViewById(R.id.addbtn);

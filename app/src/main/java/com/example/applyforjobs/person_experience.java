@@ -1,6 +1,7 @@
 package com.example.applyforjobs;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -30,7 +32,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class person_experience extends AppCompatActivity {
+public class person_experience extends Homepage {
     TextInputEditText startdate,enddate;
     int FLAG;
     CheckBox cbox;
@@ -40,10 +42,16 @@ public class person_experience extends AppCompatActivity {
     MaterialButton savebutton;
     TextInputLayout jobtitlelay,jobtypelay,companynamelay,companyloclay,startdatelay,enddatelay;
     String sdate,edate,job_title,company_location,company_name,job_type;
+    DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_experience);
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.activity_person_experience,null,false);
+        drawerLayout=findViewById(R.id.drawerlay);
+        drawerLayout.addView(contentView, 0);
+
         res=getResources();
 
         jobtitle=findViewById(R.id.titleauto);
