@@ -2,10 +2,12 @@ package com.example.applyforjobs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +53,8 @@ public class person_experience extends Homepage {
         View contentView = inflater.inflate(R.layout.activity_person_experience,null,false);
         drawerLayout=findViewById(R.id.drawerlay);
         drawerLayout.addView(contentView, 0);
+        RecyclerView rv=findViewById(R.id.rv);
+        rv.setVisibility(View.GONE);
 
         res=getResources();
 
@@ -156,15 +160,13 @@ public class person_experience extends Homepage {
                     experience.put("Company Location",company_location);
                     experience.put("Start Date",sdate);
                     experience.put("End Date",edate);
-                    ref.child("Experience").push().setValue(experience);
+                    ref.child("Experience").setValue(experience);
+                    //startActivity(new Intent(person_experience.this,Homepage.class));
                 }
             }
 
         });
     }
-
-
-
     private void createDialogWithoutDateField(final int Flag) {
         Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -186,5 +188,9 @@ public class person_experience extends Homepage {
                 }, mYear, mMonth, mDay);
         ((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
         datePickerDialog.show();
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(person_experience.this,Homepage.class));
     }
 }

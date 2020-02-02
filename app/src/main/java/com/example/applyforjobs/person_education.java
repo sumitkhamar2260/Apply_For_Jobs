@@ -2,6 +2,7 @@ package com.example.applyforjobs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,16 +30,19 @@ public class person_education extends Homepage {
     TextInputLayout degreelay,foslay;
     Resources res;
     DrawerLayout drawerLayout;
+    RecyclerView rv;
     int Flag=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = (LayoutInflater) this
+
+         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_person_education,null,false);
         drawerLayout=findViewById(R.id.drawerlay);
         drawerLayout.addView(contentView, 0);
-
+   rv=findViewById(R.id.rv);
+   rv.setVisibility(View.GONE);
         res=getResources();
       degree=findViewById(R.id.degreeauto);
       ArrayAdapter<String> jobtitleadpter = new ArrayAdapter<String>
@@ -71,8 +75,8 @@ public class person_education extends Homepage {
                   person_education.put("Field Of Study",field);
                   FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                   DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
-                  ref.child("Education").push().setValue(person_education);
-                  startActivity(new Intent(person_education.this,person_experience.class));
+                  ref.child("Education").setValue(person_education);
+                  startActivity(new Intent(person_education.this,Homepage.class));
               }
               //TODO:save details to firebase
           }
@@ -81,4 +85,8 @@ public class person_education extends Homepage {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(person_education.this,Homepage.class));
+            }
 }

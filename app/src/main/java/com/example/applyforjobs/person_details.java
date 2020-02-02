@@ -3,6 +3,7 @@ package com.example.applyforjobs;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -49,6 +50,7 @@ public class person_details extends Homepage {
     String selected_state="Andhra";
     ArrayList<String> cities;
     DrawerLayout drawerLayout;
+    RecyclerView rv;
     //NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,9 @@ public class person_details extends Homepage {
         View contentView = inflater.inflate(R.layout.activity_person_details,null,false);
         drawerLayout=findViewById(R.id.drawerlay);
         drawerLayout.addView(contentView, 0);
-
+        rv=findViewById(R.id.rv);
+        rv.setVisibility(View.GONE);
+    ////////setContentView(R.layout.activity_person_details);
         Fname=findViewById(R.id.fname);
         Address=findViewById(R.id.address);
         Email=findViewById(R.id.email);
@@ -195,7 +199,7 @@ public class person_details extends Homepage {
             personaldetails.put("DOB",date);
             ref.child("Personal details").setValue(personaldetails);
             //ref.child("Personal details").push().setValue(ob);
-            Intent intent=new Intent(person_details.this,person_education.class);
+            Intent intent=new Intent(person_details.this,Homepage.class);
             startActivity(intent);
         }
     }
@@ -215,7 +219,10 @@ public class person_details extends Homepage {
             dpd.show();
         }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(person_details.this,Homepage.class));
+    }
 }
 
 

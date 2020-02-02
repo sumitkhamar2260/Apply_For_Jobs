@@ -126,9 +126,11 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
         if (menuItem.getItemId() == R.id.nav_per) {
             startActivity(new Intent(Homepage.this,person_details.class));
+            this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_exp) {
-            startActivity(new Intent(Homepage.this,person_experience.class));
+            startActivity(new Intent(Homepage.this,Show_all_details.class));
+            this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_skill) {
             startActivity(new Intent(Homepage.this,skills.class));
@@ -139,5 +141,13 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
         //drawerLayout.closeDrawers();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 }

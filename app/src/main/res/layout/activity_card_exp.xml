@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".card_exp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_exp"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        >
+        <TextView
+            android:id="@+id/card_jobtitle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:text=""
+            android:textStyle="bold"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:id="@+id/card_company"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:textSize="10dp"
+            android:text=""
+            android:layout_marginLeft="8dp"/>
+</androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -322,6 +322,7 @@ public class Test extends AppCompatActivity {
                 ob.put("uid",uid);
                 ob.put("Score",String.valueOf(totalscore));
                 ref.child(uid).setValue(ob);
+                startActivity(new Intent(Test.this,Homepage.class));
             }
         });
     }
