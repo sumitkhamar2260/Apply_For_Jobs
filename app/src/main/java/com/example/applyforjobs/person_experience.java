@@ -153,6 +153,8 @@ public class person_experience extends Homepage {
                 else {
                     FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                     DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
+
+                    //ref.child(key);
                     Map<Object,String> experience= new HashMap<>();
                     experience.put("Job Title",job_title);
                     experience.put("Job Type",job_type);
@@ -160,7 +162,8 @@ public class person_experience extends Homepage {
                     experience.put("Company Location",company_location);
                     experience.put("Start Date",sdate);
                     experience.put("End Date",edate);
-                    ref.child("Experience").setValue(experience);
+                    String key = ref.push().getKey();
+                    ref.child("Experience").child(key).setValue(experience);
                     //startActivity(new Intent(person_experience.this,Homepage.class));
                 }
             }

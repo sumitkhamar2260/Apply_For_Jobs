@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,6 +33,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
   FirebaseAuth firebaseAuth;
   FirebaseDatabase fd;
   DatabaseReference ref;
+  TextView profilename,profileemailadd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,10 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView=findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         rv=findViewById(R.id.rv);
+        profilename=findViewById(R.id.profile_name);
+        profileemailadd=findViewById(R.id.profile_email);
+        fd=FirebaseDatabase.getInstance();
+
         jobtitle=new ArrayList<>();
         company=new ArrayList<>();
         location=new ArrayList<>();
@@ -62,6 +68,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         description.clear();
         jobid.clear();
         compid.clear();
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -125,7 +132,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
            startActivity(new Intent(Homepage.this,person_education.class));
         }
         if (menuItem.getItemId() == R.id.nav_per) {
-            startActivity(new Intent(Homepage.this,person_details.class));
+            startActivity(new Intent(Homepage.this,person_experience.class));
             this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_exp) {

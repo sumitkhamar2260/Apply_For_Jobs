@@ -34,8 +34,8 @@ public class Show_all_details extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         fd=FirebaseDatabase.getInstance();
         ref=fd.getReference().child("users");
-        ref.child(firebaseAuth.getUid());
-        ref.child("Experience");
+        ref=ref.child(firebaseAuth.getUid());
+        ref=ref.child("Experience");
 
        // jobtitle.clear();
         //company.clear();
@@ -46,7 +46,7 @@ public class Show_all_details extends AppCompatActivity {
               for(DataSnapshot childab:dataSnapshot.getChildren()){
                   Map<String,String> cob =(Map) childab.getValue();
                   String compan=cob.get("Company Name");
-                  String jobtitl=cob.get("Job Title:");
+                  String jobtitl=cob.get("Job Title");
                   jobtitle.add(jobtitl);
                   company.add(compan);
               }

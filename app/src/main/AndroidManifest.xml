@@ -11,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".card_exp"></activity>
+        <activity android:name=".splashscreen"> <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+        <activity android:name=".card_exp" />
         <activity android:name=".Show_all_details" />
         <activity
             android:name=".Test"
@@ -19,11 +24,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".applyjob" />
         <activity android:name=".Homepage" />
-        <activity android:name=".skills" >  <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        <activity android:name=".skills"></activity>
         <activity android:name=".person_experience" />
         <activity android:name=".person_education" />
         <activity android:name=".person_details" />
