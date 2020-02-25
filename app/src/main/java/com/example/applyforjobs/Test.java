@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.JsonObject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,12 +32,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Test extends AppCompatActivity {
     TextView testtype,q_no,question,option1,option2,option3,option4,completedTest,ts,testScore;
@@ -46,6 +54,7 @@ public class Test extends AppCompatActivity {
     ArrayList<String> logicalQuestions,logicalAnswers,logicalO1,logicalO2,logicalO3,logicalO4;
     ArrayList<String> verbalQuestions,verbalAnswers,verbalO1,verbalO2,verbalO3,verbalO4;
     ProgressDialog loading;
+    String companyst,jobidst;
     int count=0,totalscore;
     MaterialCardView card1,card2,card3,card4,testResult;
     PieChart pieChart;
@@ -309,19 +318,67 @@ public class Test extends AppCompatActivity {
         applyForJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase fd=FirebaseDatabase.getInstance();
-                DatabaseReference ref;
+                FirebaseDatabase fd;
+                final DatabaseReference ref;
                 FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                 fd=FirebaseDatabase.getInstance();
                 Intent intent=getIntent();
-                String companyst=intent.getStringExtra("compid");
-                String jobidst=intent.getStringExtra("jobid");
+                companyst=intent.getStringExtra("compid");
+                jobidst=intent.getStringExtra("jobid");
                 ref=fd.getReference().child("Companies").child(companyst).child("Job Openings").child(jobidst);
-                String uid=firebaseAuth.getCurrentUser().getUid();
+                final String uid=firebaseAuth.getCurrentUser().getUid();
                 Map<Object,String> ob=new HashMap<>();
                 ob.put("uid",uid);
                 ob.put("Score",String.valueOf(totalscore));
-                ref.child(uid).setValue(ob);
+                ref.child("Applicants").child(uid).setValue(ob);
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference reference=firebaseDatabase.getReference("users")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                reference.child("Education").child("Degree").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final String education = dataSnapshot.getValue().toString().trim();
+                        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        reference.child("Experience").child("Total Experience").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String exp = dataSnapshot.getValue().toString().trim();
+                                final double total_exp = Double.parseDouble(exp);
+                                DatabaseReference reference=FirebaseDatabase.getInstance().getReference("users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                reference.child("Experience").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String companyType=null;
+                                        for(DataSnapshot children:dataSnapshot.getChildren()){
+                                            if(children.child("Company Type").getValue().toString().equals("Product")) {
+                                                companyType = "Product";
+                                                break;
+                                            }
+                                            else{
+                                                companyType = "Service";
+                                            }
+                                        }
+                                        calculate_score(companyType,education,92,total_exp,totalscore);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
                 startActivity(new Intent(Test.this,Homepage.class));
             }
         });
@@ -631,5 +688,41 @@ public class Test extends AppCompatActivity {
         card3.setVisibility(View.VISIBLE);
         card4.setVisibility(View.VISIBLE);
         next.setVisibility(View.VISIBLE);
+    }
+    public void calculate_score(String companyType,String Education,double Skill,double Experience,int test_Score){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.43.184:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        String[] resumeScore = null;
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("CompanyType", companyType);
+        jsonObject.addProperty("Education", Education);
+        jsonObject.addProperty("Skill", Skill);
+        jsonObject.addProperty("Experience", Experience);
+        jsonObject.addProperty("TestScore", test_Score);
+        APIService service = retrofit.create(APIService.class);
+        Call<ResumeScoreModel> call = service.postData(jsonObject);
+        call.enqueue(new Callback<ResumeScoreModel>() {
+            @Override
+            public void onResponse(Call<ResumeScoreModel> call, Response<ResumeScoreModel> response) {
+                //hiding progress dialog
+                if(response.isSuccessful()){
+                    String[] resumeScore = response.body().getResumeScore().split(" ");
+                    resumeScore[1]=resumeScore[1].substring(0,resumeScore[1].length()-2).trim();
+                    double resume_score = 100*Double.parseDouble(resumeScore[1]);
+                    FirebaseDatabase fd;
+                    final DatabaseReference ref;
+                    fd=FirebaseDatabase.getInstance();
+                    ref=fd.getReference().child("Companies").child(companyst).child("Job Openings").child(jobidst);
+                    ref.child("Applicants").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Resume Score").setValue(resume_score);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResumeScoreModel> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

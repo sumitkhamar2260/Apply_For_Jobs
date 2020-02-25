@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,10 +41,11 @@ public class person_experience extends AppCompatActivity {
     CheckBox cbox;
     AutoCompleteTextView jobtitle,companylocation,companyname;
     Resources res;
-    Spinner jobtype;
+    Spinner jobtype,companytype;
     MaterialButton savebutton;
-    TextInputLayout jobtitlelay,jobtypelay,companynamelay,companyloclay,startdatelay,enddatelay;
-    String sdate,edate,job_title,company_location,company_name,job_type;
+    TextInputLayout jobtitlelay,jobtypelay,companynamelay,companyloclay,startdatelay,enddatelay,companytypelay;
+    TextInputEditText total_exp;
+    String sdate,edate,job_title,company_location,company_name,job_type,company_type;
     DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +68,17 @@ public class person_experience extends AppCompatActivity {
         jobtitle.setAdapter(jobtitleadpter);
 
         jobtype=findViewById(R.id.jobtypespinner);
-
+        companytype = findViewById(R.id.company_type);
         ArrayAdapter<String> jobtypeadpter = new ArrayAdapter<String>
                 (this, android.R.layout.select_dialog_item,res.getStringArray(R.array.job_type));
         jobtype.setAdapter(jobtypeadpter);
+
+        ArrayList<String> companyType = new ArrayList<>();
+        companyType.add("Product");
+        companyType.add("Service");
+        ArrayAdapter<String> companytypeadpter = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item,companyType);
+        companytype.setAdapter(companytypeadpter);
 
         companyname=findViewById(R.id.companynameauto);
 
@@ -120,8 +129,10 @@ public class person_experience extends AppCompatActivity {
         jobtypelay=findViewById(R.id.jobtypelay);
         companynamelay=findViewById(R.id.companynamelay);
         companyloclay=findViewById(R.id.companyloclay);
+        companytypelay=findViewById(R.id.companytypelay);
         startdatelay=findViewById(R.id.startlay);
         enddatelay=findViewById(R.id.endlay);
+        total_exp=findViewById(R.id.total_exp);
         savebutton=findViewById(R.id.savebtn);
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +140,7 @@ public class person_experience extends AppCompatActivity {
                 job_title=jobtitle.getText().toString().trim();
                 job_type=jobtype.getSelectedItem().toString().trim();
                 company_name=companyname.getText().toString().trim();
+                company_type=companytype.getSelectedItem().toString().trim();
                 company_location=companylocation.getText().toString().trim();
                 sdate=startdate.getText().toString().trim();
                 edate=enddate.getText().toString().trim();
@@ -137,6 +149,9 @@ public class person_experience extends AppCompatActivity {
                 }
                 else if(job_type.isEmpty()){
                     jobtypelay.setError("Select job type");
+                }
+                else if(company_type.isEmpty()){
+                    companytypelay.setError("Please Select Company Type");
                 }
                 else if (company_name.isEmpty()){
                     companynamelay.setError("Select company name");
@@ -150,6 +165,9 @@ public class person_experience extends AppCompatActivity {
                 else if(!cbox.isChecked() && edate.isEmpty()){
                     enddatelay.setError("Select end date");
                 }
+                else if(total_exp.getText().toString().trim().isEmpty()){
+                    total_exp.setError("Please Enter Your Total Experience");
+                }
                 else {
                     FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                     DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
@@ -158,13 +176,16 @@ public class person_experience extends AppCompatActivity {
                     Map<Object,String> experience= new HashMap<>();
                     experience.put("Job Title",job_title);
                     experience.put("Job Type",job_type);
+                    experience.put("Company Type",company_type);
                     experience.put("Company Name",company_name);
                     experience.put("Company Location",company_location);
                     experience.put("Start Date",sdate);
                     experience.put("End Date",edate);
                     String key = ref.push().getKey();
                     ref.child("Experience").child(key).setValue(experience);
-                    //startActivity(new Intent(person_experience.this,Homepage.class));
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
+                    reference.child("Experience").child("Total Experience").setValue(total_exp.getText().toString().trim());
+                    startActivity(new Intent(person_experience.this,Homepage.class));
                 }
             }
 

@@ -15,7 +15,6 @@
         <item>S Technology</item>
     </string-array>
     <string-array name="job_type">
-        <item></item>
         <item>Full-time</item>
         <item>Part-time</item>
         <item>Self-employed</item>

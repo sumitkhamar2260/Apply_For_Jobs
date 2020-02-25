@@ -62,6 +62,10 @@ public class person_education extends Homepage {
           @Override
           public void onClick(View view) {
               String deg=degree.getText().toString().trim();
+              if(deg.equals("Bachelor of Engineering"))
+                  deg="BE";
+              if(deg.equals("Master of Engineering"))
+                  deg="ME";
               String field=fieldofstudy.getText().toString().trim();
               if(deg.isEmpty()){
                     degreelay.setError("Select Degree");
