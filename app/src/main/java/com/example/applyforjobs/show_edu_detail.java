@@ -75,8 +75,8 @@ public class show_edu_detail extends Homepage {
 
                 RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
                 edu_rv.setLayoutManager(layoutManager);
-                card_exp ob1=new card_exp(getApplicationContext(),degree,fos);
-                edu_rv.setAdapter(ob1);
+                card_edu ob2=new card_edu(getApplicationContext(),degree,fos);
+                edu_rv.setAdapter(ob2);
             }
 
             @Override
