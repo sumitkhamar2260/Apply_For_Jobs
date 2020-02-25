@@ -21,9 +21,9 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="660dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="62dp"
         android:layout_marginEnd="8dp"
         android:background="#757575"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,11 +40,12 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"/>
         <ImageView
+            android:id="@+id/add_exp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/pencil"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="360dp"
+            android:layout_marginStart="330dp"
             android:layout_marginTop="4dp"
             />
           <androidx.recyclerview.widget.RecyclerView

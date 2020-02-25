@@ -1,15 +1,20 @@
 package com.example.applyforjobs;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -25,9 +30,11 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Homepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+   ImageView menuimage;
+    ProgressDialog pDialog;
   NavigationView navigationView;
   DrawerLayout drawerLayout;
+  ActionBarDrawerToggle t;
   RecyclerView rv;
   ArrayList<String> jobtitle,company,location,experience,salary,skills,sector,description,jobid,compid;
   FirebaseAuth firebaseAuth;
@@ -40,11 +47,26 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_homepage);
         navigationView=findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //////////////
+        menuimage=findViewById(R.id.actionmenuimage);
+        drawerLayout=findViewById(R.id.drawerlay);
+        t = new ActionBarDrawerToggle(this, drawerLayout,R.string.Open, R.string.Close);
+        drawerLayout.addDrawerListener(t);
+        t.syncState();
+        menuimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+             //////////////
         rv=findViewById(R.id.rv);
         profilename=findViewById(R.id.profile_name);
         profileemailadd=findViewById(R.id.profile_email);
         fd=FirebaseDatabase.getInstance();
-
+        pDialog = new ProgressDialog(Homepage.this);
+        pDialog.setMessage("loading..");
+        pDialog.show();
         jobtitle=new ArrayList<>();
         company=new ArrayList<>();
         location=new ArrayList<>();
@@ -101,6 +123,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                         }
                     }
                 }
+                pDialog.dismiss();
                 RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
                 rv.setLayoutManager(layoutManager);
                 jobrow ob=new jobrow(getApplicationContext(),jobtitle,company,location,experience,salary,sector,description,jobid,compid);
@@ -129,7 +152,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Homepage.this,Homepage.class));
         }
         if (menuItem.getItemId() == R.id.nav_edu) {
-           startActivity(new Intent(Homepage.this,person_education.class));
+           startActivity(new Intent(Homepage.this,show_edu_detail.class));
         }
         if (menuItem.getItemId() == R.id.nav_per) {
             startActivity(new Intent(Homepage.this,person_experience.class));
@@ -141,6 +164,9 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         }
         if (menuItem.getItemId() == R.id.nav_skill) {
             startActivity(new Intent(Homepage.this,skills.class));
+        }
+        if (menuItem.getItemId() == R.id.nav_resume) {
+            startActivity(new Intent(Homepage.this,resume_upload.class));
         }
         if(menuItem.getItemId()== R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();

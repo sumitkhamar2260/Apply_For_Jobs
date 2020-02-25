@@ -34,7 +34,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class person_experience extends Homepage {
+public class person_experience extends AppCompatActivity {
     TextInputEditText startdate,enddate;
     int FLAG;
     CheckBox cbox;
@@ -48,14 +48,14 @@ public class person_experience extends Homepage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = (LayoutInflater) this
+       /* LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = inflater.inflate(R.layout.activity_person_experience,null,false);
         drawerLayout=findViewById(R.id.drawerlay);
         drawerLayout.addView(contentView, 0);
         RecyclerView rv=findViewById(R.id.rv);
         rv.setVisibility(View.GONE);
-
+*/  setContentView(R.layout.activity_person_experience);
         res=getResources();
 
         jobtitle=findViewById(R.id.titleauto);
@@ -194,6 +194,6 @@ public class person_experience extends Homepage {
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(person_experience.this,Homepage.class));
+        startActivity(new Intent(person_experience.this,Show_all_details.class));
     }
 }

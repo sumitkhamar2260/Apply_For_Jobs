@@ -3,6 +3,7 @@
     package="com.example.applyforjobs">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,11 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splashscreen"> <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".card_edu"></activity>
+        <activity android:name=".show_edu_detail" />
+        <activity android:name=".resume_upload" />
+        <activity android:name=".splashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".card_exp" />
         <activity android:name=".Show_all_details" />
         <activity
@@ -24,14 +30,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".applyjob" />
         <activity android:name=".Homepage" />
-        <activity android:name=".skills"></activity>
+        <activity android:name=".skills" />
         <activity android:name=".person_experience" />
         <activity android:name=".person_education" />
         <activity android:name=".person_details" />
         <activity android:name=".Signup_page" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

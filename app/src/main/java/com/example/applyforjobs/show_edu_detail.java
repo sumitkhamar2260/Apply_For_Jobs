@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,21 +23,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Show_all_details extends Homepage{
-    RecyclerView exp_rv;
-    ImageView add_exp;
-    ArrayList<String> jobtitle,company;
+public class show_edu_detail extends Homepage {
+    DrawerLayout drawerLayout;
+    ImageView add_edu;
+    ArrayList<String> degree,fos;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase fd;
     DatabaseReference ref;
-    DrawerLayout drawerLayout;
+    RecyclerView edu_rv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_show_all_details);
+        //setContentView(R.layout.activity_show_edu_detail);
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_show_all_details,null,false);
+        View contentView = inflater.inflate(R.layout.activity_show_edu_detail,null,false);
         drawerLayout=findViewById(R.id.drawerlay);
         drawerLayout.addView(contentView, 0);
         RecyclerView rv=findViewById(R.id.rv);
@@ -47,51 +46,51 @@ public class Show_all_details extends Homepage{
 
 
 
-        jobtitle=new ArrayList<>();
-        exp_rv=findViewById(R.id.exprv);
-        company=new ArrayList<>();
+        degree=new ArrayList<>();
+        edu_rv=findViewById(R.id.edurv);
+        fos=new ArrayList<>();
         firebaseAuth=FirebaseAuth.getInstance();
         fd=FirebaseDatabase.getInstance();
         ref=fd.getReference().child("users");
         ref=ref.child(firebaseAuth.getUid());
-        ref=ref.child("Experience");
-         add_exp=findViewById(R.id.add_exp);
-         add_exp.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 startActivity(new Intent(Show_all_details.this,person_experience.class));
-             }
-         });
-       // jobtitle.clear();
-        //company.clear();
+        ref=ref.child("Education");
+        add_edu=findViewById(R.id.add_edu);
+        add_edu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(show_edu_detail.this,person_education.class));
+            }
+        });
         ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-              for(DataSnapshot childab:dataSnapshot.getChildren()){
-                  Map<String,String> cob =(Map) childab.getValue();
-                  String compan=cob.get("Company Name");
-                  String jobtitl=cob.get("Job Title");
-                  jobtitle.add(jobtitl);
-                  company.add(compan);
-              }
+                for(DataSnapshot childab:dataSnapshot.getChildren()){
+                    Map<String,String> cob =(Map) childab.getValue();
+                    String Degree=cob.get("Degree");
+                    String FOS=cob.get("Field Of Study");
+                    degree.add(Degree);
+                    fos.add(FOS);
+                }
 
                 RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
-                exp_rv.setLayoutManager(layoutManager);
-                card_exp ob1=new card_exp(getApplicationContext(),jobtitle,company);
-                exp_rv.setAdapter(ob1);
+                edu_rv.setLayoutManager(layoutManager);
+                card_exp ob1=new card_exp(getApplicationContext(),degree,fos);
+                edu_rv.setAdapter(ob1);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
+
         });
 
-   }
+        }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(Show_all_details.this,Homepage.class));
+        startActivity(new Intent(show_edu_detail.this,Homepage.class));
     }
 }

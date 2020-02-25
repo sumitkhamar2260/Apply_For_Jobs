@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +21,12 @@ public class card_exp extends RecyclerView.Adapter<card_exp.newMyViewHolder> {
     Context context;
     public class newMyViewHolder extends RecyclerView.ViewHolder{
         TextView card_jobtitl,card_compan;
-        CardView card_exp;
+        CardView card_exper;
         public newMyViewHolder(@NonNull View itemView) {
             super(itemView);
             card_jobtitl = (TextView)itemView.findViewById(R.id.card_jobtitle);
             card_compan = (TextView)itemView.findViewById(R.id.card_company);
-           // card_exp= (CardView)itemView.findViewById(R.id.cardview_exp);
+            card_exper= (CardView)itemView.findViewById(R.id.cardview_exp);
         }
     }
     public card_exp(Context context,ArrayList<String> jobtitle, ArrayList<String> company){
@@ -41,11 +42,22 @@ public class card_exp extends RecyclerView.Adapter<card_exp.newMyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(newMyViewHolder holder, int position) {
+    public void onBindViewHolder(newMyViewHolder holder, final int position) {
         String card_jobtit=(String) jobtitle.get(position);
         String card_com=(String) company.get(position);
         holder.card_jobtitl.setText(card_jobtit);
         holder.card_compan.setText(card_com);
+        holder.card_exper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context,person_experience.class);
+                intent.putExtra("jobtitle",jobtitle.get(position));
+                intent.putExtra("company",company.get(position));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
+            }
+        });
         }
 
     public int getItemCount() {
