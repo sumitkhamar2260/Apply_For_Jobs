@@ -59,6 +59,13 @@ public class applyjob extends AppCompatActivity {
                 Intent intent=new Intent(getApplicationContext(),Test.class);
                 intent.putExtra("compid",companyst);
                 intent.putExtra("jobid",jobidst);
+                intent.putExtra("jobtitle",jobtitlest);
+                intent.putExtra("companyname",companytv.getText().toString().trim());
+                intent.putExtra("experience",experiencest);
+                intent.putExtra("location",locationst);
+                intent.putExtra("salary",salaryst);
+                intent.putExtra("desc",descriptionst);
+                intent.putExtra("sector",sectorst);
                 startActivity(intent);
             }
         });

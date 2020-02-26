@@ -39,18 +39,18 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
   ArrayList<String> jobtitle,company,location,experience,salary,skills,sector,description,jobid,compid;
   FirebaseAuth firebaseAuth;
   FirebaseDatabase fd;
-  DatabaseReference ref;
+  DatabaseReference ref,ref1;
   TextView profilename,profileemailadd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-        navigationView=findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
         //////////////
-        menuimage=findViewById(R.id.actionmenuimage);
-        drawerLayout=findViewById(R.id.drawerlay);
-        t = new ActionBarDrawerToggle(this, drawerLayout,R.string.Open, R.string.Close);
+        menuimage = findViewById(R.id.actionmenuimage);
+        drawerLayout = findViewById(R.id.drawerlay);
+        t = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(t);
         t.syncState();
         menuimage.setOnClickListener(new View.OnClickListener() {
@@ -59,27 +59,29 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                 drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
-             //////////////
-        rv=findViewById(R.id.rv);
-        profilename=findViewById(R.id.profile_name);
-        profileemailadd=findViewById(R.id.profile_email);
-        fd=FirebaseDatabase.getInstance();
+        //////////////
+        rv = findViewById(R.id.rv);
+        profilename = findViewById(R.id.profile_name);
+        profileemailadd = findViewById(R.id.profile_email);
+        fd = FirebaseDatabase.getInstance();
         pDialog = new ProgressDialog(Homepage.this);
         pDialog.setMessage("loading..");
         pDialog.show();
-        jobtitle=new ArrayList<>();
-        company=new ArrayList<>();
-        location=new ArrayList<>();
-        experience=new ArrayList<>();
-        salary=new ArrayList<>();
-        skills=new ArrayList<>();
-        sector=new ArrayList<>();
-        description=new ArrayList<>();
-        jobid=new ArrayList<>();
-        compid=new ArrayList<>();
-        firebaseAuth=FirebaseAuth.getInstance();
-        fd=FirebaseDatabase.getInstance();
-        ref=fd.getReference().child("Companies");
+        jobtitle = new ArrayList<>();
+        company = new ArrayList<>();
+        location = new ArrayList<>();
+        experience = new ArrayList<>();
+        salary = new ArrayList<>();
+        skills = new ArrayList<>();
+        sector = new ArrayList<>();
+        description = new ArrayList<>();
+        jobid = new ArrayList<>();
+        compid = new ArrayList<>();
+        firebaseAuth = FirebaseAuth.getInstance();
+        fd = FirebaseDatabase.getInstance();
+        ref = fd.getReference().child("Companies");
+        ref1 = fd.getReference().child("users").child(FirebaseAuth.getInstance().getUid());
+
         jobtitle.clear();
         company.clear();
         location.clear();
@@ -90,16 +92,16 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         description.clear();
         jobid.clear();
         compid.clear();
-
+///////////////////////
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot child:dataSnapshot.getChildren()){
-                    Map<String ,String > ob =(Map) child.getValue();
-                    String comp=ob.get("companyname");
-                    String sect=ob.get("sector");
-                    String desc=ob.get("description");
-                    for (DataSnapshot child2:child.getChildren()) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Map<String, String> ob = (Map) child.getValue();
+                    String comp = ob.get("companyname");
+                    String sect = ob.get("sector");
+                    String desc = ob.get("description");
+                    for (DataSnapshot child2 : child.getChildren()) {
                         for (DataSnapshot child3 : child2.getChildren()) {
                             Map<String, String> ob2 = (Map) child3.getValue();
                             jobid.add(ob2.get("JobId"));
@@ -124,9 +126,9 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
                     }
                 }
                 pDialog.dismiss();
-                RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 rv.setLayoutManager(layoutManager);
-                jobrow ob=new jobrow(getApplicationContext(),jobtitle,company,location,experience,salary,sector,description,jobid,compid);
+                jobrow ob = new jobrow(getApplicationContext(), jobtitle, company, location, experience, salary, sector, description, jobid, compid);
                 rv.setAdapter(ob);
             }
 
@@ -136,6 +138,20 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
     }
+        ///////////////////////////////
+       /* ref1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                  profilename.setText("sumit");
+                  profileemailadd.setText("ajdhaj");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }*/
    /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -168,10 +184,14 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         if (menuItem.getItemId() == R.id.nav_resume) {
             startActivity(new Intent(Homepage.this,resume_upload.class));
         }
+        if (menuItem.getItemId() == R.id.nav_applied) {
+            startActivity(new Intent(Homepage.this,show_applied_jobs.class));
+        }
         if(menuItem.getItemId()== R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(Homepage.this, MainActivity.class));
         }
+
         //drawerLayout.closeDrawers();
         return true;
     }

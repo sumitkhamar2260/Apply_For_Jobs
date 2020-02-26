@@ -29,6 +29,10 @@
         android:id="@+id/nav_resume"
         android:icon="@drawable/ic_attach_file_black_24dp"
         android:title="Resume"/>
+    <item
+        android:id="@+id/nav_applied"
+        android:icon="@drawable/ic_attach_file_black_24dp"
+        android:title="Applied Jobs"/>
 
 </group>
     <item android:title="actions">

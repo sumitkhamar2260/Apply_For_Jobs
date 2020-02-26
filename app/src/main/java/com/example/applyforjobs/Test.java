@@ -54,7 +54,7 @@ public class Test extends AppCompatActivity {
     ArrayList<String> logicalQuestions,logicalAnswers,logicalO1,logicalO2,logicalO3,logicalO4;
     ArrayList<String> verbalQuestions,verbalAnswers,verbalO1,verbalO2,verbalO3,verbalO4;
     ProgressDialog loading;
-    String companyst,jobidst;
+    String companyst,jobidst,jobtitlest;
     int count=0,totalscore;
     MaterialCardView card1,card2,card3,card4,testResult;
     PieChart pieChart;
@@ -319,14 +319,33 @@ public class Test extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase fd;
-                final DatabaseReference ref;
+                final DatabaseReference ref,ref1;
                 FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
                 fd=FirebaseDatabase.getInstance();
                 Intent intent=getIntent();
                 companyst=intent.getStringExtra("compid");
+                String companyname=intent.getStringExtra("companyname");
                 jobidst=intent.getStringExtra("jobid");
+                jobtitlest=intent.getStringExtra("jobtitle");
                 ref=fd.getReference().child("Companies").child(companyst).child("Job Openings").child(jobidst);
                 final String uid=firebaseAuth.getCurrentUser().getUid();
+                ///////////
+                ref1= fd.getReference();
+                String key=ref1.push().getKey();
+                Map<String, String> ob1 = new HashMap<>();
+                ob1.put("jobid",jobidst);
+                ob1.put("company id",companyst);
+                ob1.put("company name",companyname);
+                ob1.put("score",String.valueOf(totalscore));
+                ob1.put("jobtitle",jobtitlest);
+                ob1.put("location",intent.getStringExtra("location"));
+                ob1.put("experience",intent.getStringExtra("experience"));
+                ob1.put("salary",intent.getStringExtra("salary"));
+                ob1.put("desc",intent.getStringExtra("desc"));
+                ob1.put("sector",intent.getStringExtra("sector"));
+
+                ref1.child("users").child(uid).child("Applied jobs").child(key).setValue(ob1);
+                /////////
                 Map<Object,String> ob=new HashMap<>();
                 ob.put("uid",uid);
                 ob.put("Score",String.valueOf(totalscore));
