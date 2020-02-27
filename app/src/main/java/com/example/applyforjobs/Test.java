@@ -363,7 +363,10 @@ public class Test extends AppCompatActivity {
                             degree.add(map.get("Degree"));
                         }
                         if(degree.contains("ME")){
-                            education = dataSnapshot.getValue().toString().trim();
+                            education = "ME";
+                        }
+                        else{
+                            education = "BE";
                         }
                         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -380,7 +383,7 @@ public class Test extends AppCompatActivity {
                                         String companyType=null;
                                         for(DataSnapshot children:dataSnapshot.getChildren()) {
                                             for (DataSnapshot details : children.getChildren()) {
-                                                if (children.child("Company Type").getValue().toString().equals("Product")) {
+                                                if (details.child("Company Type").getValue().toString().equals("Product")) {
                                                     companyType = "Product";
                                                     break;
                                                 } else {
