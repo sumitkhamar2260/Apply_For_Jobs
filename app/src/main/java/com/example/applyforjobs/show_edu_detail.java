@@ -53,7 +53,7 @@ public class show_edu_detail extends Homepage {
         fd=FirebaseDatabase.getInstance();
         ref=fd.getReference().child("users");
         ref=ref.child(firebaseAuth.getUid());
-        ref=ref.child("Education");
+        ref=ref.child("Education").child(firebaseAuth.getUid());
         add_edu=findViewById(R.id.add_edu);
         add_edu.setOnClickListener(new View.OnClickListener() {
             @Override
