@@ -29,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Homepage"
+                android:visibility="invisible"
                 android:textColor="#fff"
                 android:textSize="22dp"
                 android:textStyle="bold"
