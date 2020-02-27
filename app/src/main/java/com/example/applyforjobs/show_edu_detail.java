@@ -31,6 +31,7 @@ public class show_edu_detail extends Homepage {
     FirebaseDatabase fd;
     DatabaseReference ref;
     RecyclerView edu_rv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

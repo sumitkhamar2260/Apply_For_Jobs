@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".card_applied_jobs"></activity>
+        <activity android:name=".show_skills"></activity>
+        <activity android:name=".card_applied_jobs" />
         <activity android:name=".show_applied_jobs" />
         <activity android:name=".card_edu" />
         <activity android:name=".show_edu_detail" />
@@ -40,6 +41,7 @@
         <activity android:name=".person_details" />
         <activity android:name=".Signup_page" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".show_personal_details" />
 
         <meta-data
             android:name="preloaded_fonts"

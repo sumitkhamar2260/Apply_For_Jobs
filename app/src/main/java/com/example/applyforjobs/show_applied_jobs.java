@@ -65,6 +65,16 @@ public class show_applied_jobs extends Homepage{
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot childab:dataSnapshot.getChildren()){
+                    appliedjobtitle.clear();
+                    appliedcompany.clear();
+                    appliedjobid.clear();
+                    appliedscore.clear();
+                    appliedcompanyid.clear();
+                    appliedexper.clear();
+                    appliedsalary.clear();
+                    appliedlocation.clear();
+                    applieddesc.clear();
+                    appliedsector.clear();
                     Map<String,String> cob =(Map) childab.getValue();
                     appliedcompanyid.add(cob.get("company id"));
                     appliedcompany.add(cob.get("company name"));

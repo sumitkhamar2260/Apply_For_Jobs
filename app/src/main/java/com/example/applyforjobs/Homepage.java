@@ -97,6 +97,16 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                jobtitle.clear();
+                company.clear();
+                location.clear();
+                experience.clear();
+                salary.clear();
+                skills.clear();
+                sector.clear();
+                description.clear();
+                jobid.clear();
+                compid.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Map<String, String> ob = (Map) child.getValue();
                     String comp = ob.get("companyname");
@@ -172,7 +182,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
            startActivity(new Intent(Homepage.this,show_edu_detail.class));
         }
         if (menuItem.getItemId() == R.id.nav_per) {
-            startActivity(new Intent(Homepage.this,person_details.class));
+            startActivity(new Intent(Homepage.this,show_personal_details.class));
             this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_exp) {

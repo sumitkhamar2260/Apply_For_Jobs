@@ -74,16 +74,16 @@ public class skills extends Homepage {
          b1.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                 DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("users").child(firebaseAuth.getUid()).child("Skills");
                int i=1;
 
                  for(String rs: skillarrayList)
                  {
 
-                     rootRef.child("users").child(firebaseAuth.getUid()).child("Skills").child("Skill "+i).push().setValue(rs);
+                     rootRef.child("Skill "+i).setValue(rs);
                      i++;
                  }
-
+                 startActivity(new Intent(skills.this,Homepage.class));
              }
          });
      }
