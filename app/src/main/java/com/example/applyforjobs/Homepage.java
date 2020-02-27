@@ -190,7 +190,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_skill) {
-            startActivity(new Intent(Homepage.this,skills.class));
+            startActivity(new Intent(Homepage.this,show_skills.class));
         }
         if (menuItem.getItemId() == R.id.nav_resume) {
             startActivity(new Intent(Homepage.this,resume_upload.class));
