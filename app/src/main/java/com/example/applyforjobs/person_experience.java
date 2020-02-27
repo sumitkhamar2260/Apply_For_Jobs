@@ -176,7 +176,7 @@ public class person_experience extends AppCompatActivity {
                     experience.put("Start Date",sdate);
                     experience.put("End Date",edate);
                     String key = ref.push().getKey();
-                    ref.child("Experience").child(key).setValue(experience);
+                    ref.child("Experience").child(firebaseAuth.getCurrentUser().getUid()).child(key).setValue(experience);
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
                     reference.child("Experience").child("Total Experience").setValue(total_exp.getText().toString().trim());
                     startActivity(new Intent(person_experience.this,Homepage.class));

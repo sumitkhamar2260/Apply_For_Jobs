@@ -52,7 +52,7 @@ public class Show_exp_details extends Homepage{
         fd=FirebaseDatabase.getInstance();
         ref=fd.getReference().child("users");
         ref=ref.child(firebaseAuth.getUid());
-        ref=ref.child("Experience");
+        ref=ref.child("Experience").child(firebaseAuth.getUid());
          add_exp=findViewById(R.id.add_exp);
          add_exp.setOnClickListener(new View.OnClickListener() {
              @Override

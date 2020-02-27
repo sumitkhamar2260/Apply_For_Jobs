@@ -53,6 +53,7 @@ public class Test extends AppCompatActivity {
     ArrayList<String> aptitudeQuestions,aptitudeAnswers,aptitudeO1,aptitudeO2,aptitudeO3,aptitudeO4;
     ArrayList<String> logicalQuestions,logicalAnswers,logicalO1,logicalO2,logicalO3,logicalO4;
     ArrayList<String> verbalQuestions,verbalAnswers,verbalO1,verbalO2,verbalO3,verbalO4;
+
     ProgressDialog loading;
     String companyst,jobidst,jobtitlest;
     int count=0,totalscore;
@@ -353,7 +354,7 @@ public class Test extends AppCompatActivity {
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference reference=firebaseDatabase.getReference("users")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                reference.child("Education").child("Degree").addValueEventListener(new ValueEventListener() {
+                reference.child("Education").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         final String education = dataSnapshot.getValue().toString().trim();
@@ -370,13 +371,14 @@ public class Test extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         String companyType=null;
-                                        for(DataSnapshot children:dataSnapshot.getChildren()){
-                                            if(children.child("Company Type").getValue().toString().equals("Product")) {
-                                                companyType = "Product";
-                                                break;
-                                            }
-                                            else{
-                                                companyType = "Service";
+                                        for(DataSnapshot children:dataSnapshot.getChildren()) {
+                                            for (DataSnapshot details : children.getChildren()) {
+                                                if (children.child("Company Type").getValue().toString().equals("Product")) {
+                                                    companyType = "Product";
+                                                    break;
+                                                } else {
+                                                    companyType = "Service";
+                                                }
                                             }
                                         }
                                         calculate_score(companyType,education,92,total_exp,totalscore);
