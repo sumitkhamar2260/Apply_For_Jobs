@@ -168,10 +168,10 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Homepage.this,Homepage.class));
         }
         if (menuItem.getItemId() == R.id.nav_edu) {
-           startActivity(new Intent(Homepage.this,show_edu_detail.class));
+           startActivity(new Intent(Homepage.this,person_details.class));
         }
         if (menuItem.getItemId() == R.id.nav_per) {
-            startActivity(new Intent(Homepage.this,person_experience.class));
+            startActivity(new Intent(Homepage.this,show_edu_detail.class));
             this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_exp) {
