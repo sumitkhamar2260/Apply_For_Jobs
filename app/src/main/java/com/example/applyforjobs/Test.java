@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -53,9 +54,9 @@ public class Test extends AppCompatActivity {
     ArrayList<String> aptitudeQuestions,aptitudeAnswers,aptitudeO1,aptitudeO2,aptitudeO3,aptitudeO4;
     ArrayList<String> logicalQuestions,logicalAnswers,logicalO1,logicalO2,logicalO3,logicalO4;
     ArrayList<String> verbalQuestions,verbalAnswers,verbalO1,verbalO2,verbalO3,verbalO4;
-
+    ArrayList<String> degree;
     ProgressDialog loading;
-    String companyst,jobidst,jobtitlest;
+    String companyst,jobidst,jobtitlest,education;
     int count=0,totalscore;
     MaterialCardView card1,card2,card3,card4,testResult;
     PieChart pieChart;
@@ -357,7 +358,13 @@ public class Test extends AppCompatActivity {
                 reference.child("Education").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        final String education = dataSnapshot.getValue().toString().trim();
+                        for(DataSnapshot details:dataSnapshot.getChildren()){
+                            Map<String,String> map = (Map)details.getValue();
+                            degree.add(map.get("Degree"));
+                        }
+                        if(degree.contains("ME")){
+                            education = dataSnapshot.getValue().toString().trim();
+                        }
                         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                         reference.child("Experience").child("Total Experience").addValueEventListener(new ValueEventListener() {
@@ -462,7 +469,7 @@ public class Test extends AppCompatActivity {
         aptitudeO4=new ArrayList<>();
         logicalO4=new ArrayList<>();
         verbalO4=new ArrayList<>();
-
+        degree = new ArrayList<>();
     }
     public void retriveAptitudequesans(){
         aptitudeQuestionsAnswers.getReference().child("test").child("aptitude").addValueEventListener(new ValueEventListener() {
