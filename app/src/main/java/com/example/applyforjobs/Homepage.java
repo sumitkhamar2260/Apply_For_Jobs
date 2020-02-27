@@ -38,7 +38,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
   FirebaseAuth firebaseAuth;
   FirebaseDatabase fd;
   DatabaseReference ref,ref1;
-  TextView profilename,profileemailadd;
+  TextView profilename,profileemailadd,actionbartext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,8 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
         t = new ActionBarDrawerToggle(this, drawerLayout, R.string.Open, R.string.Close);
         drawerLayout.addDrawerListener(t);
         t.syncState();
+        //actionbartext=findViewById(R.id.actionbartext);
+        //actionbartext.setVisibility(View.VISIBLE);
         menuimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +60,7 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
         //////////////
+
         rv = findViewById(R.id.rv);
         profilename = findViewById(R.id.profile_name);
         profileemailadd = findViewById(R.id.profile_email);
