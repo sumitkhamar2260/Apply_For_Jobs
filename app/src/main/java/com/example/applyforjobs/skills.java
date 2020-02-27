@@ -1,6 +1,5 @@
 package com.example.applyforjobs;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,19 +7,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -36,7 +35,8 @@ public class skills extends Homepage {
     RecyclerView rv;
     skilllistadapter adapter;
     TextView tv;
-
+     Button b1;
+     FirebaseAuth firebaseAuth;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +47,9 @@ public class skills extends Homepage {
          drawerLayout.addView(contentView, 0);
          rv=findViewById(R.id.rv);
          rv.setVisibility(View.GONE);
-
+         b1=findViewById(R.id.submitskill);
          Resources res= getResources();
+         firebaseAuth=FirebaseAuth.getInstance();
         ///////////////////////////
          skilllay=findViewById(R.id.skilllay);
         skill=findViewById(R.id.autoskill);
@@ -70,7 +71,22 @@ public class skills extends Homepage {
                 onAddskill();
             }
         });
-    }
+         b1.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+               int i=1;
+
+                 for(String rs: skillarrayList)
+                 {
+
+                     rootRef.child("users").child(firebaseAuth.getUid()).child("Skills").child("Skill "+i).push().setValue(rs);
+                     i++;
+                 }
+
+             }
+         });
+     }
   public void onAddskill(){
          for(String ele:skills){
              if(ele.equals(skill.getText().toString()) && !skillarrayList.contains(skill.getText().toString())){
@@ -80,6 +96,7 @@ public class skills extends Homepage {
 
              }
          }
+
  }
     @Override
     public void onBackPressed() {
