@@ -3,7 +3,6 @@ package com.example.applyforjobs;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -168,14 +166,14 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(new Intent(Homepage.this,Homepage.class));
         }
         if (menuItem.getItemId() == R.id.nav_edu) {
-           startActivity(new Intent(Homepage.this,person_details.class));
+           startActivity(new Intent(Homepage.this,show_edu_detail.class));
         }
         if (menuItem.getItemId() == R.id.nav_per) {
-            startActivity(new Intent(Homepage.this,show_edu_detail.class));
+            startActivity(new Intent(Homepage.this,person_details.class));
             this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_exp) {
-            startActivity(new Intent(Homepage.this,Show_all_details.class));
+            startActivity(new Intent(Homepage.this, Show_exp_details.class));
             this.finish();
         }
         if (menuItem.getItemId() == R.id.nav_skill) {

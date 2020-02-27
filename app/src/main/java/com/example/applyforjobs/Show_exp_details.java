@@ -1,7 +1,6 @@
 package com.example.applyforjobs;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Show_all_details extends Homepage{
+public class Show_exp_details extends Homepage{
     RecyclerView exp_rv;
     ImageView add_exp;
     ArrayList<String> jobtitle,company;
@@ -59,7 +57,7 @@ public class Show_all_details extends Homepage{
          add_exp.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 startActivity(new Intent(Show_all_details.this,person_experience.class));
+                 startActivity(new Intent(Show_exp_details.this,person_experience.class));
              }
          });
        // jobtitle.clear();
@@ -92,6 +90,6 @@ public class Show_all_details extends Homepage{
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(Show_all_details.this,Homepage.class));
+        startActivity(new Intent(Show_exp_details.this,Homepage.class));
     }
 }

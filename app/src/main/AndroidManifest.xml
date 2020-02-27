@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".card_exp" />
-        <activity android:name=".Show_all_details" />
+        <activity android:name=".Show_exp_details" />
         <activity
             android:name=".Test"
             android:label="@string/title_activity_test"
