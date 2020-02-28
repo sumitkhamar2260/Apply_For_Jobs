@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -86,7 +87,7 @@ public class resume_upload extends AppCompatActivity {
         progressDialog.setProgressStyle(0);
         progressDialog.show();
         StorageReference storageReference=storage.getReference();
-        final String fileName=System.currentTimeMillis()+"";
+        final String fileName=FirebaseAuth.getInstance().getUid()+"";
         storageReference.child("Uploads").child(fileName).putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -94,10 +95,11 @@ public class resume_upload extends AppCompatActivity {
                         String url=taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                         DatabaseReference reference=database.getReference();
 
-                        reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        reference.child("users").child(FirebaseAuth.getInstance().getUid()).child("Resume").setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
+                                    progressDialog.dismiss();
                                     Toast.makeText(resume_upload.this,"File is Sucessfully Uploaded",Toast.LENGTH_LONG).show();
                                 }
                                 else

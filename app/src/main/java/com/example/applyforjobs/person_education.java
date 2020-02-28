@@ -81,7 +81,7 @@ public class person_education extends Homepage {
                   DatabaseReference ref= FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
 
                   ref.child("Education").push().setValue(person_education);
-                  startActivity(new Intent(person_education.this,Homepage.class));
+                  startActivity(new Intent(person_education.this,show_edu_detail.class));
               }
               //TODO:save details to firebase
           }

@@ -83,7 +83,6 @@ public class show_applied_jobs extends Homepage{
                     appliedjobid.add(cob.get("jobid"));
                     appliedjobtitle.add(cob.get("jobtitle"));
                     appliedlocation.add(cob.get("location"));
-
                     appliedsalary.add(cob.get("salary"));
                     appliedscore.add(cob.get("score"));
                     appliedsector.add(cob.get("sector"));

@@ -587,7 +587,7 @@ public class Test extends AppCompatActivity {
     }
     public void randomNumberAptitude(){
         Random rand = new Random();
-        int n = rand.nextInt(aptitudeQuestions.size());
+        int n = rand.nextInt( aptitudeQuestions.size());
         showAptitudeQuestions(n);
         answer=checkAptitudeAnswer(n);
     }

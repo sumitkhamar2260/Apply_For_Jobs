@@ -148,21 +148,23 @@ public class Homepage extends AppCompatActivity implements NavigationView.OnNavi
 
             }
         });
-    }
+
         ///////////////////////////////
-       /* ref1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                  profilename.setText("sumit");
-                  profileemailadd.setText("ajdhaj");
-            }
+        ref1.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange (@NonNull DataSnapshot dataSnapshot){
+           // profilename.setText("name");
+            //profileemailadd.setText("ejksudhd");
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        @Override
+        public void onCancelled (@NonNull DatabaseError databaseError){
 
-            }
-        });
-    }*/
+        }
+    });
+    }
+
+
    /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
